@@ -1,0 +1,22 @@
+---
+- name: "PYCHARM | Download and unarchive"
+  unarchive:
+    src: "{{ pycharm_url }}"
+    dest: "{{ programmes_dir }}"
+    remote_src: yes
+
+- name: "PYCHARM | Add to PATH | zshrc"
+  lineinfile:
+    path: ~/.zshrc
+    insertafter: EOF
+    state: present
+    line: 'export PATH="$PATH:{{ programmes_dir }}/{{ pycharm_version }}/bin"'
+  when: 'zshrc_file.stat.exists == True'
+
+- name: "PYCHARM | Add to PATH | bashrc"
+  lineinfile:
+    path: ~/.bashrc
+    insertafter: EOF
+    state: present
+    line: 'export PATH="$PATH:{{ programmes_dir }}/{{ pycharm_version }}/bin"'
+  when: 'bashrc_file.stat.exists == True'

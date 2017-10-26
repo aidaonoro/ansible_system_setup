@@ -1,0 +1,16 @@
+---
+- name: "AUTOJUMP | Configure autojump | zshrc"
+  lineinfile:
+    path: ~/.zshrc
+    insertafter: EOF
+    state: present
+    line: ". /usr/share/autojump/autojump.sh"
+  when: 'zshrc_file.stat.exists == True'
+
+- name: "AUTOJUMP | Configure autojump | bashrc"
+  lineinfile:
+    path: ~/.bashrc
+    insertafter: EOF
+    state: present
+    line: ". /usr/share/autojump/autojump.sh"
+  when: 'bashrc_file.stat.exists == True'

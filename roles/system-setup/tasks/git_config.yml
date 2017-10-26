@@ -1,0 +1,13 @@
+---
+#Define vars:
+# - git_user_name
+# - git_user_email
+- name: "GIT | Git config"
+  template:
+    src: gitconfig
+    dest: ~/.gitconfig
+  when: '"git" in basic_packages and git_user_name is defined and git_user_email is defined'
+
+- debug:
+    msg: "You must define git_user_name and git_user_email to config git."
+  when: 'git_user_name is not defined and git_user_email is not defined'

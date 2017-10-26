@@ -1,0 +1,28 @@
+---
+- name: "ANDROID STUDIO | Download and unarchive"
+  unarchive:
+    src: "{{ android_studio_url }}"
+    dest: "{{ programmes_dir }}"
+    remote_src: yes
+
+- name: "ANDROID STUDIO | Add to desktop"
+  template:
+    src: android-studio.desktop
+    dest: ~/.local/share/applications/android-studio.desktop
+  when: 'deploy_remotely == False'
+
+- name: "ANDROID STUDIO | Add to PATH | zshrc"
+  lineinfile:
+    path: ~/.zshrc
+    insertafter: EOF
+    state: present
+    line: 'export PATH="$PATH:{{ programmes_dir }}/android-studio/bin"'
+  when: 'zshrc_file.stat.exists == True'
+
+- name: "ANDROID STUDIO | Add to PATH | bashrc"
+  lineinfile:
+    path: ~/.bashrc
+    insertafter: EOF
+    state: present
+    line: 'export PATH="$PATH:{{ programmes_dir }}/android-studio/bin"'
+  when: 'bashrc_file.stat.exists == True'

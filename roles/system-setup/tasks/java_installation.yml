@@ -1,0 +1,43 @@
+---
+- name: "JAVA INSTALLATION | Make dir in /usr for java"
+  file:
+    path: "/usr/jdk"
+    state: directory
+
+- name: "JAVA INSTALLATION | Download and unarchive"
+  unarchive:
+    src: "{{ jdk_url }}"
+    dest: "/usr/jdk/"
+    remote_src: yes
+
+- name: "JAVA INSTALLATION | Configure JAVA_HOME | zshrc"
+  lineinfile:
+    path: ~/.zshrc
+    insertafter: EOF
+    state: present
+    line: 'export JAVA_HOME="/usr/jdk/{{ jdk_version_dir }}"'
+  when: 'zshrc_file.stat.exists == True'
+
+- name: "JAVA INSTALLATION | Configure JAVA_HOME | bashrc"
+  lineinfile:
+    path: ~/.bashrc
+    insertafter: EOF
+    state: present
+    line: 'export JAVA_HOME="/usr/jdk/{{ jdk_version_dir }}"'
+  when: 'bashrc_file.stat.exists == True'
+
+- name: "JAVA INSTALLATION | Configure PATH | zshrc"
+  lineinfile:
+    path: ~/.zshrc
+    insertafter: EOF
+    state: present
+    line: 'export JAVA_HOME="/usr/jdk/{{ jdk_version_dir }}"'
+  when: 'zshrc_file.stat.exists == True'
+
+- name: "JAVA INSTALLATION | Configure PATH | bashrc"
+  lineinfile:
+    path: ~/.bashrc
+    insertafter: EOF
+    state: present
+    line: 'export JAVA_HOME="/usr/jdk/{{ jdk_version_dir }}"'
+  when: 'bashrc_file.stat.exists == True'
