@@ -1,6 +1,8 @@
 ---
+#Manual installation
 pycharm_version: "pycharm-community-2017.2.3"
 pycharm_url: "https://download.jetbrains.com/python/{{ pycharm_version }}.tar.gz"
 
+#Package manager
 pycharm_manual: false
 pycharm_ide: "pycharm-community"
