@@ -1,0 +1,23 @@
+---
+deploy_remotely: false
+programmes_dir: "~/programmes"
+
+basic_packages:
+  - "python"
+  - "python-pip"
+  - "zip"
+  - "gzip"
+  - "unzip"
+  - "git"
+  - "tig"
+  - "zsh"
+  - "autojump"
+  - "jq"
+  - "silversearcher-ag" # the_silver_searcher
+
+pip_packages:
+  #- "ansible"
+  - "httpie"
+  - "pexpect"
+
+netbeans_url: "http://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javaee-linux.sh"

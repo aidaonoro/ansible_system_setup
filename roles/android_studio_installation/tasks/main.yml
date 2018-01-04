@@ -1,0 +1,11 @@
+---
+- import_tasks: android_studio.yml
+  become: true
+  when: android_studio_package_manager
+
+# Do not use manual installation. Unarchive module is likely to fail.
+- import_tasks: manual_android_studio.yml
+  when: android_studio_manual
+
+- import_tasks: android_studio_umake.yml
+  when: android_umake

@@ -1,0 +1,48 @@
+---
+- name: "JAVA INSTALLATION MANUAL | Download and unarchive jdk in /usr/jdk"
+  block:
+    - file:
+        path: "/usr/jdk"
+        state: directory
+
+    - unarchive:
+        src: "{{ jdk_url }}"
+        dest: "/usr/jdk/"
+        copy: no
+  become: true
+
+- stat: path="~/.zshrc"
+  register: zshrc_file
+
+- name: "JAVA INSTALLATION MANUAL | Configure JAVA_HOME and PATH for ZSH"
+  block:
+    - lineinfile:
+        path: ~/.zshrc
+        insertafter: EOF
+        state: present
+        line: 'export JAVA_HOME="/usr/jdk/{{ jdk_version_dir }}"'
+
+    - lineinfile:
+        path: ~/.zshrc
+        insertafter: EOF
+        state: present
+        line: 'export JAVA_HOME="/usr/jdk/{{ jdk_version_dir }}"'
+  when: 'zshrc_file.stat.exists == True'
+
+- stat: path="~/.bashrc"
+  register: bashrc_file
+
+- name: "JAVA INSTALLATION MANUAL | Configure JAVA_HOME and PATH for BASH"
+  block:
+    - lineinfile:
+        path: ~/.bashrc
+        insertafter: EOF
+        state: present
+        line: 'export JAVA_HOME="/usr/jdk/{{ jdk_version_dir }}"'
+
+    - lineinfile:
+        path: ~/.bashrc
+        insertafter: EOF
+        state: present
+        line: 'export JAVA_HOME="/usr/jdk/{{ jdk_version_dir }}"'
+  when: 'bashrc_file.stat.exists == True'

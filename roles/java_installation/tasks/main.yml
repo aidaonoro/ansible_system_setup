@@ -1,0 +1,8 @@
+---
+- import_tasks: java_installation.yml
+  become: true
+  when: not java_manual
+
+# Do not use manual installation. Unarchive is likely to fail
+- import_tasks: manual_java_installation.yml
+  when: java_manual

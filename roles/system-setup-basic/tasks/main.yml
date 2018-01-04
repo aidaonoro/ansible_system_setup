@@ -1,0 +1,47 @@
+---
+- name: "PACKAGE MANAGER | Install basic packages"
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ basic_packages }}"
+
+- name: "PIP | Install python-based packages"
+  become: true
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ pip_packages }}"
+  when: '"python-pip" in basic_packages'
+
+- name: "Install Ubuntu-Make"
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+  block:
+    - name: "Add Ubuntu-Make to package repository"
+      apt_repository:
+        repo: 'ppa:ubuntu-desktop/ubuntu-make'
+        state: present
+
+    - name: "Update packages"
+      apt:
+        update_cache: yes
+
+    - name: "Install Ubuntu-Make"
+      package:
+        name: 'ubuntu-make'
+        state: latest
+
+- name: "Create programmes directory"
+  file:
+    path: "{{ programmes_dir }}"
+    state: directory
+
+- import_tasks: zsh_installation.yml
+  when: '"zsh" in basic_packages'
+
+- import_tasks: git_config.yml
+  when: '"git" in basic_packages'
+
+- import_tasks: autojump_config.yml
+  when: '"autojump" in basic_packages'

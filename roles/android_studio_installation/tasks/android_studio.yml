@@ -1,0 +1,28 @@
+---
+- name: "ANDROID STUDIO INSTALLATION | Add Android Studio Package Repository"
+  apt_repository:
+    repo: 'ppa:maarten-fonville/android-studio'
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: "ANDROID STUDIO INSTALLATION | Add Android Studio Package Repository"
+  yum_repository:
+    repo: 'ppa:maarten-fonville/android-studio'
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: "ANDROID STUDIO INSTALLATION | Update all packages"
+  package:
+    name: '*'
+    state: latest
+  when: ansible_os_family == "RedHat"
+
+- name: "ANDROID STUDIO INSTALLATION | Update all packages"
+  apt:
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: "ANDROID STUDIO INSTALLATION  | Install Android Studio with package manager"
+  package:
+    name: 'android-studio'
+    state: latest

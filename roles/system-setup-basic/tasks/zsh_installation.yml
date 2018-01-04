@@ -1,0 +1,14 @@
+---
+- name: "ZSH | Ensure git-core is installed"
+  become: true
+  package:
+    name: "git-core"
+    state: latest
+
+- name: "ZSH | Apply complementary commands for Ubuntu"
+  shell: "wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh"
+  when: ansible_os_family == "Debian"
+
+- name: "ZSH | Set default user shell"
+  become: true
+  shell: "chsh -s `which zsh`"

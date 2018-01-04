@@ -1,0 +1,39 @@
+---
+- hosts: {{ your_host }}
+  remote_user: {{ your_user }}
+
+  vars_files:
+    - vars/main.yml
+
+  vars_prompt:
+    - name: "restart"
+      prompt: "Do you want to restart at the end of the playbook? (yes/NO)"
+      private: no
+
+  pre_tasks:
+    - name: "Update all packages"
+      become: true
+      package:
+        name: '*'
+        state: latest
+      when: ansible_os_family == "RedHat"
+    
+    - name: "Upgrade"
+      become: true
+      apt:
+        update_cache: yes
+        upgrade: yes
+      when: ansible_os_family == "Debian"
+
+  post_tasks:
+    - name: "Restart System"
+      become: true
+      command: /sbin/reboot
+      when: restart == 'yes'
+
+  roles:
+    - system-setup-basic
+    - java_installation
+    - netbeans_installation
+    - pycharm_installation
+    - android_studio_installation

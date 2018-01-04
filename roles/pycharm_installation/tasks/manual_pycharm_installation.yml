@@ -3,7 +3,10 @@
   unarchive:
     src: "{{ pycharm_url }}"
     dest: "{{ programmes_dir }}"
-    remote_src: yes
+    copy: no
+
+- stat: path="~/.zshrc"
+  register: zshrc_file
 
 - name: "PYCHARM | Add to PATH | zshrc"
   lineinfile:
@@ -12,6 +15,9 @@
     state: present
     line: 'export PATH="$PATH:{{ programmes_dir }}/{{ pycharm_version }}/bin"'
   when: 'zshrc_file.stat.exists == True'
+
+- stat: path="~/.bashrc"
+  register: bashrc_file
 
 - name: "PYCHARM | Add to PATH | bashrc"
   lineinfile:

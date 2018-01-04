@@ -1,0 +1,5 @@
+---
+android_studio_url: "https://developer.android.com/studio/index.html?hl=es-419#linux-bundle"
+android_studio_manual: false
+android_umake: false
+android_studio_package_manager: true

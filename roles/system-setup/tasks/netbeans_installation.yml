@@ -1,5 +1,0 @@
----
-- name: "NETBEANS | Download Netbeans"
-  get_url:
-    url: "{{ netbeans_url }}"
-    dest: "{{ programmes_dir }}"

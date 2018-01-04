@@ -1,0 +1,17 @@
+---
+- name: "PYCHARM | Add Pycharm Package Repository"
+  apt_repository:
+    repo: 'ppa:mystic-mirage/pycharm'
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: "PYCHARM | Add Pycharm Package Repository"
+  yum_repository:
+    repo: 'ppa:mystic-mirage/pycharm'
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: "PYCHARM | Install Community version with package manager"
+  package:
+    name: "{{ pycharm_ide }}"
+    state: present

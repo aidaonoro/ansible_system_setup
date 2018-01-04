@@ -1,0 +1,12 @@
+---
+- block:
+  - name: "ANDROID STUDIO | Install using Ubuntu-Make"
+    expect:
+      command: "umake android --accept-license"
+      responses:
+        path: /bin/bash -c "echo"
+      timeout: 120
+      echo: yes
+  rescue:
+  - debug:
+      msg: "Android Studio already installed or there was an error"

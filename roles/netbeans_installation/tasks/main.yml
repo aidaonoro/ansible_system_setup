@@ -1,0 +1,33 @@
+---
+- block:
+  - name: "NETBEANS | Add Netbeans Package Repository"
+    apt_repository:
+      repo: 'ppa:vajdics/netbeans-installer'
+      state: present
+
+  - name: "NETBEANS | Update all packages"
+    apt:
+      update_cache: yes
+  become: true
+  when: ansible_os_family == "Debian"
+
+- block:
+  - name: "NETBEANS | Add Netbeans Package Repository"
+    yum_repository:
+      repo: 'ppa:vajdics/netbeans-installer'
+      state: present
+
+  - name: "NETBEANS | Update all packages"
+    package:
+      name: '*'
+      state: latest
+  become: true
+  when: ansible_os_family == "RedHat"
+
+- name: "NETBEANS  | Install Netbeans with package manager"
+  become: true
+  package:
+    name: 'netbeans-installer'
+    state: latest
+
+

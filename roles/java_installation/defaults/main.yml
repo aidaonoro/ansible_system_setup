@@ -1,0 +1,7 @@
+---
+jdk_url: "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.tar.gz"
+jdk_version_dir: "jdk1.8.0_151"
+
+java_version: "8"
+java_default: true
+java_manual: false

@@ -1,0 +1,8 @@
+---
+- import_tasks: pycharm_installation.yml
+  become: true
+  when: not pycharm_manual
+
+# Do not use manual installation. Unarchive module is likely to fail.
+- import_tasks: manual_pycharm_installation.yml
+  when: pycharm_manual

@@ -1,0 +1,38 @@
+---
+- name: "JAVA INSTALLATION | Add Java Package Repository"
+  apt_repository:
+    repo: 'ppa:webupd8team/java'
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: "JAVA INSTALLATION | Add Java Package Repository"
+  yum_repository:
+    repo: 'ppa:webupd8team/java'
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: "JAVA INSTALLATION | Update all packages"
+  package:
+    name: '*'
+    state: latest
+  when: ansible_os_family == "RedHat"
+
+- name: "JAVA INSTALLATION | Update all packages"
+  apt:
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: "JAVA INSTALLATION | Accept Java license"
+  command: "echo debconf shared/accepted-oracle-license-v1-1 select true | \ && debconf-set-selections"
+
+- name: "JAVA INSTALLATION  | Install Java with package manager"
+  package:
+    name: 'oracle-java{{ java_version }}-installer'
+    state: latest
+  when: not java_default
+
+- name: "JAVA INSTALLATION  | Install Java with package manager"
+  package:
+    name: 'oracle-java{{ java_version }}-set-default'
+    state: latest
+  when: java_default
