@@ -10,11 +10,11 @@ depending on the needs of each one.
 The roles included here are by default. Just remove the ones
 you do not want to run.
 
-+ [system-setup-basics](roles/system-setup-basics/): installs basic useful packages and some of them.
-+ [java_installation](roles/java_installation/)
-+ [netbeans_installation](roles/netbeans_installation/)
-+ [pycharm_installation](roles/pycharm_installation/): community version.
-+ [android_studio_installation](roles/android_studio_installation)
++ [system-setup-basics](https://github.com/aidaonoro/ansible_system_setup/tree/master/roles/system-setup-basic): installs basic useful packages and some of them.
++ [java_installation](https://github.com/aidaonoro/ansible_system_setup/tree/master/roles/java_installation)
++ [netbeans_installation](https://github.com/aidaonoro/ansible_system_setup/tree/master/roles/netbeans_installation)
++ [pycharm_installation](https://github.com/aidaonoro/ansible_system_setup/tree/master/roles/pycharm_installation): community version.
++ [android_studio_installation](https://github.com/aidaonoro/ansible_system_setup/tree/master/roles/android_studio_installation)
 
 
 
