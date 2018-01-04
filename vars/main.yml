@@ -1,0 +1,13 @@
+---
+git_user_name: "Your Name"
+git_user_email: "your.email@email.com"
+
+java_version: "8"
+java_default: true
+java_manual: false
+
+android_studio_package_manager: true
+android_studio_manual: false
+android_umake: false
+
+pycharm_manual: false
